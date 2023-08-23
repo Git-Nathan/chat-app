@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.truncate- {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &2 {
+    @extend .truncate-;
+    -webkit-line-clamp: 2;
+  }
+
+  &3 {
+    @extend .truncate-;
+    -webkit-line-clamp: 3;
+  }
+
+  &4 {
+    @extend .truncate-;
+    -webkit-line-clamp: 4;
+  }
+
+  &5 {
+    @extend .truncate-;
+    -webkit-line-clamp: 5;
+  }
+
+  &6 {
+    @extend .truncate-;
+    -webkit-line-clamp: 6;
+  }
+}
