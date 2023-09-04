@@ -46,3 +46,13 @@ body {
     -webkit-line-clamp: 6;
   }
 }
+
+.new-chat-drawer {
+  .ant-drawer-header {
+    display: none !important;
+  }
+
+  .ant-drawer-body {
+    padding: 0 !important;
+  }
+}

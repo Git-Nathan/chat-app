@@ -13,7 +13,7 @@ export const signin = async (req, res) => {
     } else {
       const response = await Api.post('/', {
         operation: 'sql',
-        sql: `INSERT INTO realtime_chat_app.users (id, name, email, image) VALUE (${id}, '${name}', '${email}', '${image}')`,
+        sql: `INSERT INTO realtime_chat_app.users (userId, name, email, image) VALUE (${id}, '${name}', '${email}', '${image}')`,
       })
       if (response.status === 200) {
         res.status(200).json({ message: 'Signin successfully' })
@@ -21,6 +21,20 @@ export const signin = async (req, res) => {
         res.status(500).json({ message: 'Insert failed' })
       }
     }
+  } catch (error) {
+    res.status(500).json({ error })
+  }
+}
+
+export const getNewChatUsers = async (req, res) => {
+  const { email } = req.body
+
+  try {
+    const { data } = await Api.post('/', {
+      operation: 'sql',
+      sql: `SELECT * FROM realtime_chat_app.users WHERE email <> '${email}'`,
+    })
+    res.status(200).json({ data })
   } catch (error) {
     res.status(500).json({ error })
   }

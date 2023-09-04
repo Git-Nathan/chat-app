@@ -1,6 +1,16 @@
 export interface IUser {
-  id: string
-  name?: string | null
-  email?: string | null
-  image?: string | null
+  userId: string
+  name: string
+  email: string
+  image: string
+}
+
+export interface IMessage {
+  messageId: string
+  senderUserId: string
+  name: string
+  image: string
+  conversationId: string
+  content: string
+  __createdtime__: number
 }

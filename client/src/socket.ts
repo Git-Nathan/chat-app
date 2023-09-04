@@ -1,3 +1,5 @@
-import { io } from 'socket.io-client'
+import { Manager } from 'socket.io-client'
 
-export const socket = io('http://localhost:4000')
+const manager = new Manager('http://localhost:4000')
+
+export const socket = manager.socket('/')

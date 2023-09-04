@@ -13,33 +13,46 @@ export class Fetch {
     return new Fetch(baseUrl, config)
   }
 
-  get(url: string, config?: RequestInit) {
-    return fetch(this.baseUrl + url, {
+  async get(url: string, config?: RequestInit) {
+    const response = await fetch(this.baseUrl + url, {
       method: 'GET',
       ...this.config,
       ...config,
     })
+    return response.json()
   }
 
-  put(url: string, data: { [key: string]: any }, config?: RequestInit) {
-    return fetch(this.baseUrl + url, {
+  async put(url: string, data: { [key: string]: any }, config?: RequestInit) {
+    const response = await fetch(this.baseUrl + url, {
       method: 'PUT',
       body: typeof data === 'object' ? JSON.stringify(data) : data,
       ...this.config,
       ...config,
     })
+    return response.json()
   }
 
-  patch(url: string, data: { [key: string]: any }, config?: RequestInit) {
-    return fetch(this.baseUrl + url, {
+  async patch(url: string, data: { [key: string]: any }, config?: RequestInit) {
+    const response = await fetch(this.baseUrl + url, {
       method: 'PATCH',
       body: typeof data === 'object' ? JSON.stringify(data) : data,
       ...this.config,
       ...config,
     })
+    return response.json()
   }
 
-  post(url: string, data: { [key: string]: any }, config?: RequestInit) {
+  async post(url: string, data: { [key: string]: any }, config?: RequestInit) {
+    const response = await fetch(this.baseUrl + url, {
+      method: 'POST',
+      body: typeof data === 'object' ? JSON.stringify(data) : data,
+      ...this.config,
+      ...config,
+    })
+    return response.json()
+  }
+
+  postRes(url: string, data: { [key: string]: any }, config?: RequestInit) {
     return fetch(this.baseUrl + url, {
       method: 'POST',
       body: typeof data === 'object' ? JSON.stringify(data) : data,
@@ -48,11 +61,12 @@ export class Fetch {
     })
   }
 
-  delete(url: string, config?: RequestInit) {
-    return fetch(this.baseUrl + url, {
+  async delete(url: string, config?: RequestInit) {
+    const response = await fetch(this.baseUrl + url, {
       method: 'DELETE',
       ...this.config,
       ...config,
     })
+    return response.json()
   }
 }
