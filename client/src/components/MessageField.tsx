@@ -46,14 +46,14 @@ export function MessageField({ conversationId }: IMessageField) {
   return (
     <div
       ref={messagesRef}
-      className="messages flex h-full flex-col items-center overflow-y-scroll"
+      className="messages flex h-full flex-col items-center overflow-y-scroll px-2"
     >
       {messagesRecieved.map((item) => {
         const sendTime = moment(item.__createdtime__).calendar()
         return (
           <div
             key={item.messageId}
-            className="flex w-full flex-col items-center px-2"
+            className="flex w-full flex-col items-center"
           >
             <div className="my-2 text-sm">{sendTime}</div>
             {currentEmail === item.senderUserId ? (
