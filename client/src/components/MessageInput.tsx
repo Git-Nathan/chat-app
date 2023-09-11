@@ -2,7 +2,7 @@ import { SendIcon } from '@/assets/icon'
 import { socket } from '@/socket'
 import { Input } from 'antd'
 import { useSession } from 'next-auth/react'
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 export interface IMessageInput {
   conversationId: string
@@ -10,6 +10,9 @@ export interface IMessageInput {
 
 export function MessageInput({ conversationId }: IMessageInput) {
   const { data: session } = useSession({ required: true })
+  const currentEmail = session?.user?.email as string
+
+  // Send the message
   const [message, setMessage] = useState('')
 
   const sendMessage = () => {
@@ -26,10 +29,15 @@ export function MessageInput({ conversationId }: IMessageInput) {
     }
   }
 
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setMessage(e.target.value)
+    socket.emit('typing_message', { conversationId, typingUser: currentEmail })
+  }
+
   return (
     <div className="grid grid-cols-[1fr_40px] items-center px-2">
       <Input
-        onChange={(e) => setMessage(e.target.value)}
+        onChange={handleChange}
         value={message}
         placeholder="Aa"
         onPressEnter={sendMessage}

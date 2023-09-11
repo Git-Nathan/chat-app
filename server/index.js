@@ -32,6 +32,12 @@ io.on('connection', (socket) => {
     socket.join(conversationId)
   })
 
+  socket.on('typing_message', (data) => {
+    const conversationId = data.conversationId
+
+    io.in(conversationId).emit('typing_message', data)
+  })
+
   socket.on('send_message', async (data) => {
     const { senderUserId, conversationId, message, __createdtime__ } = data
 

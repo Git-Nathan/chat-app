@@ -57,3 +57,22 @@ export const getMessageById = async (req, res) => {
     res.status(500).json({ error })
   }
 }
+
+export const getTheRestUsers = async (req, res) => {
+  const { currentEmail, conversationId } = req.body
+
+  try {
+    const { data } = await Api.post('/', {
+      operation: 'sql',
+      sql: `SELECT *
+            FROM realtime_chat_app.conversationUser AS T1
+            LEFT JOIN realtime_chat_app.users AS T2
+            ON T1.usersEmail = T2.email
+            WHERE T1.conversationId = '${conversationId}'
+            AND T1.usersEmail <> '${currentEmail}'`,
+    })
+    res.status(200).json({ data })
+  } catch (error) {
+    res.status(500).json({ error })
+  }
+}
